@@ -6,12 +6,11 @@
 /*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 01:23:59 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/05/29 00:44:43 by guilhfer         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:29:59 by guilhfer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <unistd.h>
 
 int	minishell_loop(t_list **tenv, t_data *data, t_clear *clear)
 {

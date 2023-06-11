@@ -6,7 +6,7 @@
 /*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:40:24 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/05/29 15:16:17 by guilhfer         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:37:11 by guilhfer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define MINISHELL_H
 
 # include "../lib/libft/include/libft.h"
+# include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <readline/readline.h>
 
 typedef struct s_data
 {
@@ -40,6 +40,7 @@ typedef struct s_clear
 //|Utils
 t_list		**create_list(char **envp);
 t_data		*data_alloc(void);
+char		**ft_tokenize(char const *str);
 
 //|Buitins
 char		*get_tenv(t_list **tenv, char *var);

@@ -9,6 +9,7 @@ SRCS =	src/main.c \
 		src/prompt/prompt.c \
 		src/prompt/check_prompt.c \
 		src/utils/create_list.c \
+		src/utils/tokenize.c \
 
 # Source Directories
 VPATH =	src: \
@@ -16,8 +17,8 @@ VPATH =	src: \
 		src/main_utils: \
 		src/parsing: \
 		src/prompt: \
-		src/utils \
-
+		src/utils: \
+		src/lexer
 
 # Compiler and Flags
 CC = cc
@@ -82,7 +83,6 @@ norma:
 
 leak:
 	valgrind -q --leak-check=full --show-leak-kinds=all --trace-children=yes \
-	--suppressions=./tests/readline.supp --track-fds=yes --track-origins=yes \
 	./minishell
 
 .PHONY: all clean fclean re libft
