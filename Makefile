@@ -10,7 +10,6 @@ SRCS =	src/main.c \
 		src/prompt/check_prompt.c \
 		src/utils/create_list.c \
 		src/utils/tokenize.c \
-		src/lexer/lexer.c
 
 # Source Directories
 VPATH =	src: \
