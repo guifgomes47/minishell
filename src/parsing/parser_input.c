@@ -25,16 +25,17 @@ static int parser_pipe(char *input, int index, t_data *data)
     return (handle_pipe(input, new_input, data));
 }
 
-int verify_caracter(char **input, int *i, t_data *data)
+int verify_caracter(char **input, int *index, t_data *data)
 {
-    if ((*input)[*i] == '\'')
+    if ((*input)[*index] == '\'')
     {
-        (*i)++;
-        while ((*input)[*i] != '\'')
-            (*i)++;
+        (*index)++;
+        while ((*input)[*index] != '\'')
+            (*index)++;
     }
-    else if ((*input)[*i] == '|')
+    else if ((*input)[*index] == '|')
     {
+        parser_pipe() // concluir
     }
 }
 
@@ -61,6 +62,6 @@ int parser_input(char *input, t_data *data, int pipe, t_shell shell)
                 i++;
             }
         }
-        if (verify_caracter(char **input))
+        if (verify_caracter(char **input)) // concluir
     }
 }

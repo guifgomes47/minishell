@@ -89,19 +89,20 @@ void parser_var(char **input_addr, int *index, t_data *data, t_shell shell)
     len = get_len(&(input_addr[0][*index + 1]));
     name = ft_substr(*input_address, *index + 1, len);
     if (len == 1 && input_addr[0][*index + 1] == '?')
-        value = ft_itoa(shell->status) else if (len)
-            value = get_value(name, data);
+        value = ft_itoa(shell->status);
+    else if (len)
+        value = get_value(name, data);
     else
         value = ft_strdup("$");
     free(name);
-    input = ft_substr(*input_addr, 0, *i);
+    input = ft_substr(*input_addr, 0, *index);
     tmp = ft_strjoin(input, value);
     free(input);
-    input = ft_strjoin(tmp, &(input_addr[0][*i + 1 + len]));
+    input = ft_strjoin(tmp, &(input_addr[0][*index + 1 + len]));
     len = ft_strlen(value);
     free(tmp);
     free(value);
     free(*input_addr);
     *input_addr = input;
-    *i += len - 1;
+    *index += len - 1;
 }

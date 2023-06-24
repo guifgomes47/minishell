@@ -12,9 +12,34 @@
 
 #include "../include/minishell.h"
 
+void action_for_input(char **command, t_data *data)
+{
+    if (!data->redirection)
+    {
+        data->redirection = 1;
+        return;
+    }
+    if (!ft_strcmp(command[0], "echo"))
+        ft_echo(command);
+    else if (!ft_strcmp(command[0], "cd"))
+        ft_cd(command, data);
+    else if (!ft_strcmp(command[0], "pwd"))
+        ft_pwd(data);
+    // else if (!ft_strcmp(command[0], "export"))
+    //     ft_export(inputs, data);
+    // else if (!ft_strcmp(command[0], "unset"))
+    //     ft_unset(inputs, data);
+    else if (!ft_strcmp(command[0], "env"))
+        ft_env(data->envp);
+    // else if (!ft_strcmp(command[0], "exit"))
+    //     ft_exit(inputs, data);
+    // else
+    //     ft_exec(inputs, data);
+}
+
 int process_input(char *input, t_data *data, int piped)
 {
-    char **inputs;
+    char **command;
     int fds[2];
 
     if (parser_error(input))
@@ -25,5 +50,9 @@ int process_input(char *input, t_data *data, int piped)
     fds[0] = dup(1);
     fds[1] = dup(0);
     input = input_clear(input);
-    parser_redirect()
+    parser_redirect(&input, data);
+    input = input_clear(input);
+    command = split_input(input);
+    free(input);
+    action_for_input(command, data);
 }

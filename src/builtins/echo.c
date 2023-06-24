@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/23 02:49:23 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 06:34:00 by lucperei         ###   ########.fr       */
+/*   Created: 2023/06/23 21:38:45 by lucperei          #+#    #+#             */
+/*   Updated: 2023/06/23 21:38:45 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int handle_pipe(char *a, char *b, t_data *data)
+void ft_echo(char **inputs)
 {
-    pid_t pid;
-    int fds[2];
+    int index;
+    int flag;
+    t_shell *shell;
 
-    if (pipe(fds) < 0)
-        exit(EXIT_FAILURE);
-    pid = fork();
-    if (pid == 0)
+    flag = 0;
+    index = 1;
+    shell->status = 0;
+    while (inputs[index] && !ft_strcmp(inputs[index], "-n") && index++)
+        flag = 1;
+    while (inputs[index])
     {
-        free(b);
-        dup2(fds[1], 1);
-        close(fds[0]);
-        close(fds[1]);
-        process_input(a, data, 1);
+        write(1, inputs[index], ft_strlen(inputs[index]);
+        if (inputs[index + 1])
+            write(1, " ", 1);
+        index++;
     }
-    else if (pid < 0)
-        exit(EXIT_FAILURE);
-    else
-    {
-        free(a);
-        a = NULL;
-    }
+    if (!flag)
+        write(1, '\n', 1);
 }

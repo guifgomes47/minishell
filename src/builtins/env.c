@@ -12,9 +12,9 @@
 
 #include "../../include/minishell.h"
 
-int	ft_haystack(char c, char *charset)
+int ft_haystack(char c, char *charset)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (charset[i])
@@ -26,10 +26,10 @@ int	ft_haystack(char c, char *charset)
 	return (0);
 }
 
-int	ft_lstrstr(char *str, char *to_find)
+int ft_lstrstr(char *str, char *to_find)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
 	while (str[i])
@@ -46,9 +46,9 @@ int	ft_lstrstr(char *str, char *to_find)
 	return (0);
 }
 
-char	*ft_path(char *str, char *charset, char *find)
+char *ft_path(char *str, char *charset, char *find)
 {
-	int	i;
+	int i;
 
 	i = ft_lstrstr(str, find);
 	if (!i)
@@ -58,10 +58,10 @@ char	*ft_path(char *str, char *charset, char *find)
 	return (&str[i]);
 }
 
-char	*get_tenv(t_list **tenv, char *var)
+char *get_tenv(t_list **tenv, char *var)
 {
-	char	*path;
-	t_list	*ptr;
+	char *path;
+	t_list *ptr;
 
 	ptr = *tenv;
 	printf("ptr tenv: %s", (char *)ptr->content);
@@ -72,4 +72,30 @@ char	*get_tenv(t_list **tenv, char *var)
 		ptr = ptr->next;
 	}
 	return (NULL);
+}
+
+void ft_env(char **env)
+{
+	int x;
+	int y;
+	char *ptr;
+	t_shell *shell;
+
+	x = 0;
+	while (env[x])
+	{
+		ptr = ft_strstr(env[x], "=");
+		if (ptr)
+		{
+			y = 0;
+			while (env[x][y])
+			{
+				write(1, &env[x][y], 1);
+				y++;
+			}
+			ft_putchar('\n');
+		}
+		x++;
+	}
+	shell->status = 0;
 }

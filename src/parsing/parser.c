@@ -86,16 +86,16 @@ int init_parser(char *input, t_data *data, t_shell *shell)
 {
     char *clean_input;
 
-    clean_input = input_clear();
+    clean_input = input_clear(input);
     shell->input = NULL;
-    if (!*clean_input)
-    {
-        free(clean_input);
-        return (0);
-    }
     if (clean_input == 0)
     {
         ft_putstr_fd("The minishell does not support multiline.\n");
+        return (0);
+    }
+    if (!*clean_input)
+    {
+        free(clean_input);
         return (0);
     }
     return (parser_input(clean_input, data, 0, shell));
