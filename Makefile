@@ -2,13 +2,13 @@
 NAME = minishell
 
 SRCS =	src/main.c \
-
 		src/utils/pwd_utils.c \
 		src/utils/init_data.c \
 		src/utils/free_memory.c \
 		src/utils/fd_utils.c \
 		src/utils/export_utils.c \
 		src/utils/exec_utils.c \
+		src/utils/env_utils.c \
 		src/parsing/split_input.c \
 		src/parsing/process_input.c \
 		src/parsing/parser.c \

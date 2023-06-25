@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 22:29:31 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 22:29:31 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:32:51 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int search_index(char *search, t_data *data)
     int y;
 
     x = 0;
-    while (data->envp[i])
+    while (data->envp[x])
     {
         y = 0;
         while (data->envp[x][y] && data->envp[x][y] == search[y] &&
@@ -48,7 +48,7 @@ char **export_envp(char **env, char *exp)
     char **aux;
 
     index = 0;
-    aux = malloc(sizeof(char *) * (ft_strlen(env) + 1));
+    aux = malloc(sizeof(char *) * (env_len(env) + 1));
     if (!aux)
         exit(EXIT_FAILURE);
     while (env[index])
@@ -71,7 +71,7 @@ void copy_export(t_data *data)
     int position;
 
     index = 0;
-    temp = duplicate_envp(data->envp);
+    temp = copy_env(data->envp);
     while (temp[index + 1])
     {
         position = index + 1;
@@ -86,20 +86,19 @@ void copy_export(t_data *data)
             index++;
     }
     show_export(temp);
-    free_envp(temp);
+    free_env(temp);
 }
 
 void ft_export(char **input, t_data *data)
 {
     int index;
     int len;
-    t_shell *shell;
+    t_shell shell;
 
     index = 1;
-    len = ft_strlen(input);
     if (input[index])
     {
-        while (input[index] != '\0')
+        while (input[index])
         {
             len = search_index(input[index], data);
             if (len >= 0 && verify_export(input[index]))
@@ -117,5 +116,5 @@ void ft_export(char **input, t_data *data)
     }
     else
         copy_export(data);
-    shell->status = 0;
+    shell.status = 0;
 }

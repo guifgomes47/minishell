@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 06:06:21 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 02:18:31 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 04:33:39 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@ static int parser_pipe(char *input, int index, t_data *data)
 static int parse_semicolon(char *input, int index, t_data *data)
 {
     int space;
+    int status;
     char *new_input;
-    t_shell *shell;
+    t_shell shell;
 
     space = 0;
+    status = shell.status;
     if (input[index - 1] == ' ')
         space = 1;
     new_input = ft_strdup(&input[index + 1]);
     input[index - space] = '\0';
     process_input(input, data, 0);
-    if (shell->status != 130)
-        return (init_parser(new_input, data, shell));
+    if (status != 130)
+        return (init_parser(new_input, data, &shell));
     else
         free(new_input);
     return (0);
@@ -46,6 +48,8 @@ static int parse_semicolon(char *input, int index, t_data *data)
 
 int verify_caracter(char **input, int *index, t_data *data)
 {
+    t_shell shell;
+
     if ((*input)[*index] == '\'')
     {
         (*index)++;
@@ -63,12 +67,12 @@ int verify_caracter(char **input, int *index, t_data *data)
         return (1);
     }
     else if ((*input)[*index] == '$')
-        parser_var(input, index, data);
+        parser_var(input, index, data, &shell);
     (*index)++;
     return (0);
 }
 
-int parser_input(char *input, t_data *data, int piped, t_shell shell)
+int parser_input(char *input, t_data *data, int piped, t_shell *shell)
 {
     int index;
     int count;

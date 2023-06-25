@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils                                         :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 15:45:38 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/24 15:45:38 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 03:58:44 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char **get_path(int aux, t_data *data, char *input)
 int verify_exec_path(char **input, t_data *data)
 {
     int index;
-    char *aux;
+    int aux;
     char **paths;
     struct stat statbuf;
 
@@ -55,12 +55,12 @@ int verify_exec_path(char **input, t_data *data)
         stat(paths[index], &statbuf);
         if ((statbuf.st_mode & S_IXUSR) && !(statbuf.st_mode & __S_IFDIR))
         {
-            free_array(paths);
+            free_env(paths);
             return (1);
         }
         index++;
     }
-    free_env(path);
+    free_env(paths);
     return (0);
 }
 

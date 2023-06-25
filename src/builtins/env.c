@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 03:58:50 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/05/28 20:59:26 by guilhfer         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:52:41 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void ft_env(char **env)
 	int x;
 	int y;
 	char *ptr;
-	t_shell *shell;
+	t_shell shell;
 
 	x = 0;
 	while (env[x])
@@ -97,5 +97,24 @@ void ft_env(char **env)
 		}
 		x++;
 	}
-	shell->status = 0;
+	shell.status = 0;
+}
+
+// Essa função fara uma copia do array env, alocando, interando e colocando nulo no final.
+char **copy_env(char **envp)
+{
+	int index;
+	char **env_dt;
+
+	index = 0;
+	env_dt = malloc(sizeof(char *) * env_len(envp));
+	if (!env_dt)
+		exit(EXIT_FAILURE);
+	while (envp[index])
+	{
+		env_dt[index] = ft_strdup(envp[index]);
+		index++;
+	}
+	env_dt[index] = 0;
+	return (env_dt);
 }

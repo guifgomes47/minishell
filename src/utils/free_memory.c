@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 23:49:44 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/22 00:24:56 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 03:48:16 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void free_env(char **envp)
     int len;
 
     index = 0;
-    len = ft_strlen(envp);
+    len = env_len(envp);
     while (index < len)
         free(envp[index++]);
     free(envp);

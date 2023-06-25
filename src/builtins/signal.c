@@ -6,22 +6,24 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 22:18:14 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/21 23:10:47 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:14:40 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void handle_signal(int signal, t_shell shell)
+void handle_signal(int signal)
 {
+    t_shell shell;
+
     if (signal == SIGINT)
     {
-        shell->status = 130;
-        if (shell->input)
+        shell.status = 130;
+        if (shell.input)
             ft_putstr_fd("\nminishell>", 2);
-        if (shell->input)
-            free(shell->input);
-        shell->input = ft_strdup("\0");
+        if (shell.input)
+            free(shell.input);
+        shell.input = ft_strdup("\0");
     }
     else if (signal == SIGQUIT)
         write(2, "\b\b \b\b", 6);

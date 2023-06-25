@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:25:34 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 00:17:42 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 04:16:42 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,16 @@ static char *get_value(char *name, t_data *data)
     return (NULL);
 }
 
-void parser_var(char **input_addr, int *index, t_data *data, t_shell shell)
+void parser_var(char **input_addr, int *index, t_data *data, t_shell *shell)
 {
     int len;
     char *tmp;
-    char value;
-    char name;
-    char input;
+    char *value;
+    char *name;
+    char *input;
 
     len = get_len(&(input_addr[0][*index + 1]));
-    name = ft_substr(*input_address, *index + 1, len);
+    name = ft_substr(*input_addr, *index + 1, len);
     if (len == 1 && input_addr[0][*index + 1] == '?')
         value = ft_itoa(shell->status);
     else if (len)

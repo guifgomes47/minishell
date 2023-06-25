@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 00:38:29 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/22 17:32:42 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 04:32:23 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int input_size(char *str)
     return (index);
 }
 
-char input_clear(char *str)
+char *input_clear(char *str)
 {
     int len;
     char *clean_input;
@@ -90,7 +90,7 @@ int init_parser(char *input, t_data *data, t_shell *shell)
     shell->input = NULL;
     if (clean_input == 0)
     {
-        ft_putstr_fd("The minishell does not support multiline.\n");
+        ft_putstr_fd("The minishell does not support multiline.\n", 2);
         return (0);
     }
     if (!*clean_input)

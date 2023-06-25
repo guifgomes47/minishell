@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/23 21:40:05 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/25 05:18:05 by lucperei         ###   ########.fr       */
+/*   Created: 2023/06/25 05:46:09 by lucperei          #+#    #+#             */
+/*   Updated: 2023/06/25 05:51:14 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/libft.h"
 
-void ft_pwd(t_data *data)
+char *ft_strstr(const char *stack, const char *c)
 {
-    t_shell shell;
+    size_t len;
 
-    ft_putstr_fd(data->dir, 1);
-    ft_putstr_fd("\n", 1);
-    shell.status = 0;
+    len = ft_strlen(c);
+    if (!(*c))
+        return ((char *)stack);
+    while (*stack)
+    {
+        if (ft_strncmp(stack, c, len) != 0)
+            stack++;
+        else
+            return ((char *)stack);
+    }
+    return (NULL);
 }

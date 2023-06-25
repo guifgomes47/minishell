@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 18:42:02 by marvin            #+#    #+#             */
-/*   Updated: 2023/06/23 18:42:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/06/25 04:01:50 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char **split_input(char *str)
     int len;
 
     len = substrings_account(str);
-    input = (char **)malloc(len + 1) * sizeof(char *);
+    input = malloc((len + 1) * sizeof(char *));
     if (!input)
         exit(EXIT_FAILURE);
     index = 0;

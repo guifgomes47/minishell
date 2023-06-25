@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 21:49:53 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 21:49:53 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 06:13:01 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,17 @@ int cd_sub(t_data *data)
     return (1);
 }
 
+int cd_path(char **arg, t_data *data)
+{
+    if (chdir(arg[1]) == -1)
+        return (0);
+    handle_pwd(data, arg[1]);
+    return (1);
+}
+
 void ft_cd(char **command, t_data *data)
 {
-    t_shell *shell;
+    t_shell shell;
 
     if (command[1] && command[2])
         return (error_message("Error cd: too many arguments\n", 1));
@@ -40,7 +48,7 @@ void ft_cd(char **command, t_data *data)
     {
         if (!cd_dir(data))
             return (error_message("Error cd: HOME: is undefined\n", 1));
-    } // Se command[1] for igual a "-", a função cd_minus é chamada.
+    }
     else if (ft_strcmp(command[1], "-") == 0)
     {
         if (!cd_sub(data))
@@ -48,8 +56,8 @@ void ft_cd(char **command, t_data *data)
     }
     else
     {
-        if (!cd_path(command, data)
+        if (!cd_path(command, data))
             return (error_message("Error cd: no such file or directory\n", 1));
     }
-    shell->status = 0;
+    shell.status = 0;
 }

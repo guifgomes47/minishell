@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:38:33 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 17:08:19 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:09:23 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int get_name_size(char *str)
         {
             while (str[++index] != '"')
             {
-                if (str[índex] == '\\')
+                if (str[index] == '\\')
                     index++;
             }
             index++;
@@ -41,8 +41,10 @@ int get_name_size(char *str)
     return (index);
 }
 
-int fd_is_append(int fd, int append, char *filename)
+int fd_is_append(int append, char *filename)
 {
+    int fd;
+
     if (append == 0)
     {
         fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
@@ -60,11 +62,14 @@ int fd_is_append(int fd, int append, char *filename)
     }
 }
 
-void msg_error(t_data *data, t_shell *shell)
+void msg_error(void)
 {
+    t_shell shell;
+    t_data data;
+
     printf("Error: wrong permissions\n");
-    shell->status = 1;
-    data->redirection = 0;
+    shell.status = 1;
+    data.redirection = 0;
 }
 
 void redirect(char *str, int index, char **input, int is_append, int op)
@@ -72,37 +77,36 @@ void redirect(char *str, int index, char **input, int is_append, int op)
     int fd;
     int i;
     char *filename;
-    t_shell shell;
-    t_data *data;
+    t_data data;
 
     i = index;
     if (str[i + 1] == ' ')
         i++;
     filename = get_filename(&(str[i + 1]), &i);
     delete_redirect(input, index, i);
-    fd = fd_is_append(fd, is_append, filename);
+    fd = fd_is_append(is_append, filename);
     free(filename);
     if (fd < 0)
     {
-        msg_error(data, shell);
+        msg_error();
         return;
     }
     dup2(fd, op);
-    if (data->fd_output != 1)
-        close(data->fd_output);
-    data->fd_output = fd;
-    parser_redirect(input, data);
+    if (data.fd_output != 1)
+        close(data.fd_output);
+    data.fd_output = fd;
+    parser_redirect(input);
 }
 
-void handle_redirect(char **input, int index, t_data *data)
+void handle_redirect(char **input, int index)
 {
     char *str;
 
     str = *input;
     if (str[index] == '>' && str[index + 1] != '>')
-        redirect(str, index, 0, 1);
+        redirect(str, index, input, 0, 1);
     else if (str[index] == '>' && str[index + 1] == '>')
-        redirect(str, index, 1, 1);
-    else if (str[index] == '<' && str[index + 1] == '<')
-        redirect(str, index, 2, 0);
+        redirect(str, index, input, 1, 1);
+    else if (str[index] == '<' && str[index + 1] != '<')
+        redirect(str, index, input, 2, 0);
 }

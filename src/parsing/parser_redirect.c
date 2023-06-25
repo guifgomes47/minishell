@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:57:58 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 16:54:17 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 04:49:15 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void delete_redirect(char **input_addr, int index, int count)
     char *tmp;
 
     tmp = ft_substr(input_addr[0], 0, index);
-    input = ft_strjoin(tmp, &(input_addr[0][index + 1]));
+    input = ft_strjoin(tmp, &(input_addr[0][count + 1]));
     free(tmp);
     free(*input_addr);
     *input_addr = input;
@@ -86,7 +86,7 @@ void parser_redirect_quotes(char *str, int *index, char quote)
     }
 }
 
-int parser_redirect(char **input, t_data *data)
+int parser_redirect(char **input)
 {
     int index;
     char *str;
@@ -104,7 +104,7 @@ int parser_redirect(char **input, t_data *data)
         }
         if (str[index] == '>' || str[index] == '<')
         {
-            handle_redirect(input, index, data);
+            handle_redirect(input, index);
             return (1);
         }
         if (str[index] == '\\')

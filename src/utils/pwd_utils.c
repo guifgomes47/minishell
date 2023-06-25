@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 23:05:42 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 23:05:42 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 03:42:07 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void handle_env_pwd(t_data *data)
     {
         pwd = ft_strjoin("PWD=", data->dir);
         replace_variable(pwd, data, search_index(pwd, data));
-        free(aux);
+        free(pwd);
     }
     else
     {

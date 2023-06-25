@@ -6,27 +6,27 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 02:49:23 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 06:34:00 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:23:46 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void handle_parent_process(char *input, t_data *data, int pid, int fd)
+void handle_parent_process(char *input, t_data *data, int pid, int *fds)
 {
     int fd;
     int status;
-    t_shell *shell;
+    t_shell shell;
 
     if (waitpid(pid, &status, 0) != pid)
         exit(EXIT_FAILURE);
-    free(shell->input);
-    shell->input = NULL;
+    free(shell.input);
+    shell.input = NULL;
     fd = dup(0);
-    dup2(fd[0], 0);
-    close(fd[0]);
-    close(fd[1]);
-    init_parser(input, data, shell);
+    dup2(fds[0], 0);
+    close(fds[0]);
+    close(fds[1]);
+    init_parser(input, data, &shell);
     dup2(fd, 0);
     close(fd);
 }

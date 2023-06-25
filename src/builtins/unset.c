@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 14:58:44 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/24 14:58:44 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:11:30 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char **unset_env(char **env, int index)
 
     x = 0;
     y = 0;
-    aux = malloc(sizeof(char *) * (ft_strlen(env) - 1));
+    aux = malloc(sizeof(char *) * (env_len(env) - 1));
     if (!aux)
         exit(EXIT_FAILURE);
-    while (env[x] != '\0')
+    while (env[x])
     {
         if (x != index)
         {

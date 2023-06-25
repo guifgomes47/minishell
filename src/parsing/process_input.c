@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 06:33:26 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 15:56:24 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 04:50:09 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int process_input(char *input, t_data *data, int piped)
     fds[0] = dup(1);
     fds[1] = dup(0);
     input = input_clear(input);
-    parser_redirect(&input, data);
+    parser_redirect(&input);
     input = input_clear(input);
     command = split_input(input);
     free(input);

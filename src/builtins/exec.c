@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 15:39:15 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/24 15:39:15 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:39:58 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int execute(char **input, t_data *data)
     index = 0;
     statbuf.st_mode = 0;
     aux = search_index("PATH=", data);
-    path = get_paths(aux, data, input[0]);
+    path = get_path(aux, data, input[0]);
     while (path[index])
     {
         stat(path[index], &statbuf);
@@ -44,7 +44,7 @@ int exec_and_verify(char **input, t_data *data)
     index = search_index("PATH=", data);
     stat(input[0], &statbuf);
     if (ft_strchr(input[0], '/') && (statbuf.st_mode & S_IXUSR) &&
-        (execve(input[0], &input[0], data->env) != -1))
+        (execve(input[0], &input[0], data->envp) != -1))
         return (0);
     else if (index >= 0)
     {
@@ -58,7 +58,7 @@ void ft_exec(char **input, t_data *data)
 {
     pid_t pid;
     int status;
-    t_shell *shell;
+    t_shell shell;
 
     status = 0;
     if (!verify_exec(input, data))
@@ -77,7 +77,7 @@ void ft_exec(char **input, t_data *data)
         init_signal();
         waitpid(pid, &status, 0);
     }
-    shell->status = WEXITSTATUS(status);
-    if (shell->quit)
-        shell->status = 130;
+    shell.status = WEXITSTATUS(status);
+    if (shell.quit)
+        shell.status = 130;
 }

@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:37:20 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/23 15:47:01 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 04:34:38 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void skip_quotes(char *str, int *index)
 {
     char quote;
 
-    quotes = str[(*index)++];
+    quote = str[(*index)++];
     while (str[(*index)] != quote)
     {
         if (str[(*index)] == '\\' && quote == '"')
@@ -61,7 +61,7 @@ int parser_error(char *str)
         {
             if (redir_error(str, &index, str[index]))
             {
-                shell->status = 1;
+                shell.status = 1;
                 ft_putstr_fd("Error: wrong or unsupported redirection\n", 2);
                 return (1);
             }
