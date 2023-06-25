@@ -25,6 +25,25 @@ static int parser_pipe(char *input, int index, t_data *data)
     return (handle_pipe(input, new_input, data));
 }
 
+static int parse_semicolon(char *input, int index, t_data *data)
+{
+    int space;
+    char *new_input;
+    t_shell *shell;
+
+    space = 0;
+    if (input[index - 1] == ' ')
+        space = 1;
+    new_input = ft_strdup(&input[index + 1]);
+    input[index - space] = '\0';
+    process_input(input, data, 0);
+    if (shell->status != 130)
+        return (init_parser(new_input, data, shell));
+    else
+        free(new_input);
+    return (0);
+}
+
 int verify_caracter(char **input, int *index, t_data *data)
 {
     if ((*input)[*index] == '\'')
@@ -35,11 +54,21 @@ int verify_caracter(char **input, int *index, t_data *data)
     }
     else if ((*input)[*index] == '|')
     {
-        parser_pipe() // concluir
+        parser_pipe((*input), *index, data);
+        return (1);
     }
+    else if ((*input)[*index] == ';')
+    {
+        parse_semicolon((*input), *index, data);
+        return (1);
+    }
+    else if ((*input)[*index] == '$')
+        parser_var(input, index, data);
+    (*index)++;
+    return (0);
 }
 
-int parser_input(char *input, t_data *data, int pipe, t_shell shell)
+int parser_input(char *input, t_data *data, int piped, t_shell shell)
 {
     int index;
     int count;
@@ -58,10 +87,12 @@ int parser_input(char *input, t_data *data, int pipe, t_shell shell)
                 if (input[index] == '$' && !(count % 2))
                     parser_var(&input, &index, data, shell);
                 if (count && !(count % 2))
-                    i--;
-                i++;
+                    index--;
+                index++;
             }
         }
-        if (verify_caracter(char **input)) // concluir
+        if (verify_caracter(&input, &index, data))
+            return (0);
     }
+    return (process_input(input, data, piped));
 }

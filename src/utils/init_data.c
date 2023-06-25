@@ -13,11 +13,13 @@
 #include "../include/minishell.h"
 
 // Inicializa
-void init_data(t_data *data, char **envp)
+void init_data(t_data *data, t_shell *shell, char **envp)
 {
     data->envp = copy_env(envp);
     data->dir = getcwd(NULL, 0);
     data->fd_input = 0;
     data->fd_output = 1;
     data->redirection = 1;
+    shell->status = 0;
+    shell->input = NULL;
 }

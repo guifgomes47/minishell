@@ -24,6 +24,16 @@ void free_env(char **envp)
     free(envp);
 }
 
+void free_input(char **input)
+{
+    int index;
+
+    index = 0;
+    while (input[index])
+        free(input[index++]);
+    free(input);
+}
+
 void free_memory(t_data *data, char *input)
 {
     free_env(data->envp);

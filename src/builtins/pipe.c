@@ -12,6 +12,25 @@
 
 #include "../include/minishell.h"
 
+void handle_parent_process(char *input, t_data *data, int pid, int fd)
+{
+    int fd;
+    int status;
+    t_shell *shell;
+
+    if (waitpid(pid, &status, 0) != pid)
+        exit(EXIT_FAILURE);
+    free(shell->input);
+    shell->input = NULL;
+    fd = dup(0);
+    dup2(fd[0], 0);
+    close(fd[0]);
+    close(fd[1]);
+    init_parser(input, data, shell);
+    dup2(fd, 0);
+    close(fd);
+}
+
 int handle_pipe(char *a, char *b, t_data *data)
 {
     pid_t pid;
@@ -34,5 +53,7 @@ int handle_pipe(char *a, char *b, t_data *data)
     {
         free(a);
         a = NULL;
+        handle_parent_process(a, data, pid, fds);
     }
+    return (1);
 }

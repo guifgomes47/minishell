@@ -12,6 +12,17 @@
 
 #include "../include/minishell.h"
 
+void exit_pipe(t_data *data)
+{
+    t_shell *shell;
+
+    free_input(data->envp);
+    if (shell->input)
+        free(shell->input);
+    free(data->dir);
+    exit(EXIT_SUCCESS);
+}
+
 void error_message(char *str, int status)
 {
     t_shell *shell;

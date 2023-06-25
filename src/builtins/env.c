@@ -12,67 +12,67 @@
 
 #include "../../include/minishell.h"
 
-int ft_haystack(char c, char *charset)
-{
-	int i;
+// int ft_haystack(char c, char *charset)
+// {
+// 	int i;
 
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (charset[i])
+// 	{
+// 		if (c == charset[i])
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
-int ft_lstrstr(char *str, char *to_find)
-{
-	int i;
-	int j;
+// int ft_lstrstr(char *str, char *to_find)
+// {
+// 	int i;
+// 	int j;
 
-	i = 0;
-	while (str[i])
-	{
-		j = 0;
-		while (str[i + j] == to_find[j])
-		{
-			if (str[i + j + 1] == '=')
-				return (i + j + 1);
-			j++;
-		}
-		return (0);
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		j = 0;
+// 		while (str[i + j] == to_find[j])
+// 		{
+// 			if (str[i + j + 1] == '=')
+// 				return (i + j + 1);
+// 			j++;
+// 		}
+// 		return (0);
+// 	}
+// 	return (0);
+// }
 
-char *ft_path(char *str, char *charset, char *find)
-{
-	int i;
+// char *ft_path(char *str, char *charset, char *find)
+// {
+// 	int i;
 
-	i = ft_lstrstr(str, find);
-	if (!i)
-		return (NULL);
-	while (!ft_haystack(str[i], charset))
-		i++;
-	return (&str[i]);
-}
+// 	i = ft_lstrstr(str, find);
+// 	if (!i)
+// 		return (NULL);
+// 	while (!ft_haystack(str[i], charset))
+// 		i++;
+// 	return (&str[i]);
+// }
 
-char *get_tenv(t_list **tenv, char *var)
-{
-	char *path;
-	t_list *ptr;
+// char *get_tenv(t_list **tenv, char *var)
+// {
+// 	char *path;
+// 	t_list *ptr;
 
-	ptr = *tenv;
-	printf("ptr tenv: %s", (char *)ptr->content);
-	{
-		path = ft_path(ptr->content, "=", var);
-		if (path)
-			return (path);
-		ptr = ptr->next;
-	}
-	return (NULL);
-}
+// 	ptr = *tenv;
+// 	printf("ptr tenv: %s", (char *)ptr->content);
+// 	{
+// 		path = ft_path(ptr->content, "=", var);
+// 		if (path)
+// 			return (path);
+// 		ptr = ptr->next;
+// 	}
+// 	return (NULL);
+// }
 
 void ft_env(char **env)
 {

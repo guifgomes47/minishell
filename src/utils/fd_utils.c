@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 01:23:59 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/06/22 00:50:46 by lucperei         ###   ########.fr       */
+/*   Created: 2023/06/24 18:13:13 by lucperei          #+#    #+#             */
+/*   Updated: 2023/06/24 18:13:13 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <unistd.h>
 
-int main(int argc, char **argv, char **envp)
+void close_fd(t_data *data)
 {
-	t_data data;
-	t_shell shell;
-
-	(void)argc;
-	(void)argv;
-	init_data(&data, &shell, envp);
-	if (!data.envp)
-		exit(EXIT_FAILURE);
-	while (1)
-	{
-		shell->quit = 0;
-		free(shell->input);
-		init_signal();
-		ft_putstr_fd("minishell >", 2);
-		if (!get_next_line(0, &shell->input))
-			free_memory(&data, shell->input);
-		else
-			init_parser(shell->input, &data, &shell);
-	}
-	return (0);
+    if (data->fd_input != 0)
+    {
+        close(data->fd_input);
+        data->fd_input = 0;
+    }
+    if (data->fd_output != 1)
+    {
+        close(data->fd_output);
+        data->fd_output = 1;
+    }
 }

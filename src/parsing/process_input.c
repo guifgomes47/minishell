@@ -25,16 +25,16 @@ void action_for_input(char **command, t_data *data)
         ft_cd(command, data);
     else if (!ft_strcmp(command[0], "pwd"))
         ft_pwd(data);
-    // else if (!ft_strcmp(command[0], "export"))
-    //     ft_export(inputs, data);
-    // else if (!ft_strcmp(command[0], "unset"))
-    //     ft_unset(inputs, data);
+    else if (!ft_strcmp(command[0], "export"))
+        ft_export(command, data);
+    else if (!ft_strcmp(command[0], "unset"))
+        ft_unset(command, data);
     else if (!ft_strcmp(command[0], "env"))
         ft_env(data->envp);
-    // else if (!ft_strcmp(command[0], "exit"))
-    //     ft_exit(inputs, data);
-    // else
-    //     ft_exec(inputs, data);
+    else if (!ft_strcmp(command[0], "exit"))
+        ft_exit(command, data);
+    else
+        ft_exec(command, data);
 }
 
 int process_input(char *input, t_data *data, int piped)
@@ -55,4 +55,13 @@ int process_input(char *input, t_data *data, int piped)
     command = split_input(input);
     free(input);
     action_for_input(command, data);
+    free_input(command);
+    dup2(fds[0], 1);
+    dup2(fds[1], 1);
+    close_fd(data);
+    close(fds[0]);
+    close(fds[1]);
+    if (piped)
+        exit_pipe(data);
+    return (0);
 }
