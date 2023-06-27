@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 01:23:59 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/06/25 07:38:10 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:47:48 by guilhfer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_data data;
-	t_shell shell;
-	// int fd;
-	char *line;
+	t_data	data;
+	t_shell	shell;
+	char	*line;
 
 	(void)argc;
 	(void)argv;

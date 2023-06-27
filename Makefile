@@ -38,7 +38,7 @@ VPATH =	src: \
 
 # Compiler and Flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I include -g3
+CFLAGS =  -Wall -Wextra -Werror -I include -g3
 LDFLAGS = -L lib/libft -lft -lreadline
 
 OBJ_DIR = obj
@@ -97,9 +97,8 @@ norma:
 	@clear
 	@norminette $(INC_PATH) $(SRC_PATH) | grep Error || true
 
-leak:
+valg:
 	valgrind -q --leak-check=full --show-leak-kinds=all --trace-children=yes \
-	--suppressions=./tests/readline.supp --track-fds=yes --track-origins=yes \
 	./minishell
 
 .PHONY: all clean fclean re libft

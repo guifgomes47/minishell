@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 03:47:57 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/25 04:00:35 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 19:36:05 by guilhfer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-int env_len(char **env)
+int	env_len(char **env)
 {
-    int index;
+	int	index;
 
-    index = 0;
-    while (env[index])
-        index++;
-    return (++index);
+	index = 0;
+	while (env[index])
+		index++;
+	return (++index);
 }

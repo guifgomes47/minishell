@@ -3,66 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 02:11:16 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/25 03:13:09 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/06/25 19:36:40 by guilhfer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-void escape_char(char **dst, char **src)
+void	escape_char(char **dst, char **src)
 {
-    char ctr;
+	char	ctr;
 
-    (*src)++;
-    if (**src == '\'')
-        ctr = '"';
-    else
-        ctr = '\'';
-    *((*dst)++) = ctr;
-    *((*dst)++) = *((*src)++);
-    *((*dst)++) = ctr;
+	(*src)++;
+	if (**src == '\'')
+		ctr = '"';
+	else
+		ctr = '\'';
+	*((*dst)++) = ctr;
+	*((*dst)++) = *((*src)++);
+	*((*dst)++) = ctr;
 }
 
-void copy_ptr(char **src, char **dst, char ptr)
+void	copy_ptr(char **src, char **dst, char ptr)
 {
-    int count;
+	int	count;
 
-    while (**src != ptr)
-    {
-        count = 0;
-        while (**src == '\\' && ptr == '"')
-        {
-            *((*dst)++) = *((*src)++);
-            count++;
-        }
-        if (count && !(count % 2))
-            *((*dst)--) = *((*src)--);
-        *((*dst)++) = *((*src)++);
-    }
+	while (**src != ptr)
+	{
+		count = 0;
+		while (**src == '\\' && ptr == '"')
+		{
+			*((*dst)++) = *((*src)++);
+			count++;
+		}
+		if (count && !(count % 2))
+			*((*dst)--) = *((*src)--);
+		*((*dst)++) = *((*src)++);
+	}
 }
 
-void ptr_size(char **str, int *index, char ptr)
+void	ptr_size(char **str, int *index, char ptr)
 {
-    int count;
+	int	count;
 
-    while (**str != ptr && **str)
-    {
-        count = 0;
-        while (ptr == '"' && **str == '\\')
-        {
-            (*index)++;
-            (*str)++;
-            count++;
-        }
-        if (count && !(count % 2))
-        {
-            (*str)--;
-            (*index)--;
-        }
-        (*index)++;
-        (*str)++;
-    }
+	while (**str != ptr && **str)
+	{
+		count = 0;
+		while (ptr == '"' && **str == '\\')
+		{
+			(*index)++;
+			(*str)++;
+			count++;
+		}
+		if (count && !(count % 2))
+		{
+			(*str)--;
+			(*index)--;
+		}
+		(*index)++;
+		(*str)++;
+	}
 }
