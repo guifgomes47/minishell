@@ -6,7 +6,7 @@
 /*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:50:55 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/05/28 22:32:16 by guilhfer         ###   ########.fr       */
+/*   Updated: 2023/06/25 19:39:29 by guilhfer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int			ft_toupper(int c);
 int			ft_tolower(int c);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
+char		*ft_strstr(const char *stack, const char *c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *str1, const void *str2, size_t n);

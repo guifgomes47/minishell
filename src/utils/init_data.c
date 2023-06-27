@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_prompt.c                                     :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 22:20:19 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/05/29 15:17:15 by guilhfer         ###   ########.fr       */
+/*   Created: 2023/06/21 05:50:02 by lucperei          #+#    #+#             */
+/*   Updated: 2023/06/27 13:47:02 by guilhfer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*check_prompt(t_clear *clear)
+// Inicializa
+void	init_data(t_data *data, t_shell *shell, char **envp)
 {
-	char	*line;
-
-	if (!clear)
-		return (NULL);
-	line = prompt_shell();
-	if (!line)
-		return (NULL);
-	return (line);
-}
-
-char	*choose_prompt(t_clear *clear)
-{
-	if (!clear->first)
-	{
-		ft_putstr_fd("Clear first not set.\n", 2);
-	}
-	clear->first++;
-	if (clear->data->handler == 0)
-		return (check_prompt(clear));
-	return (check_prompt(clear));
+	data->envp = copy_env(envp);
+	data->dir = getcwd(NULL, 0);
+	data->fd_input = 0;
+	data->fd_output = 1;
+	data->redirection = 1;
+	shell->status = 0;
+	shell->input = NULL;
 }

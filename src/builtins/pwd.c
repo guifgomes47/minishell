@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 13:26:15 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/05/28 20:40:28 by guilhfer         ###   ########.fr       */
+/*   Created: 2023/06/23 21:40:05 by lucperei          #+#    #+#             */
+/*   Updated: 2023/06/27 13:46:09 by guilhfer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*prompt_shell(void)
+void	ft_pwd(t_data *data)
 {
-	char	*line;
-	char	*ptr;
+	t_shell	shell;
 
-	line = ft_strdup("");
-	if (!line)
-		return (NULL);
-	ptr = line;
-	line = ft_strjoin(line, "A");
-	if (!line)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	return (line);
+	ft_putstr_fd(data->dir, 1);
+	ft_putstr_fd("\n", 1);
+	shell.status = 0;
 }

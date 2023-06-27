@@ -2,26 +2,43 @@
 NAME = minishell
 
 SRCS =	src/main.c \
+		src/utils/pwd_utils.c \
+		src/utils/init_data.c \
+		src/utils/free_memory.c \
+		src/utils/fd_utils.c \
+		src/utils/export_utils.c \
+		src/utils/exec_utils.c \
+		src/utils/env_utils.c \
+		src/parsing/split_input.c \
+		src/parsing/process_input.c \
+		src/parsing/parser.c \
+		src/parsing/parser_var.c \
+		src/parsing/parser_utils.c \
+		src/parsing/parser_redirect.c \
+		src/parsing/parser_input.c \
+		src/parsing/parser_error.c \
+		src/parsing/handle_redirect.c \
+		src/builtins/unset.c \
+		src/builtins/signal.c \
+		src/builtins/pwd.c \
+		src/builtins/pipe.c \
+		src/builtins/export.c \
+		src/builtins/exit.c \
+		src/builtins/exec.c \
 		src/builtins/env.c \
-		src/main_utils/init_loop.c \
-		src/main_utils/main_utils.c \
-		src/parsing/init_parsing.c \
-		src/prompt/prompt.c \
-		src/prompt/check_prompt.c \
-		src/utils/create_list.c \
+		src/builtins/echo.c \
+		src/builtins/cd.c \
 
 # Source Directories
 VPATH =	src: \
 		src/builtins: \
-		src/main_utils: \
 		src/parsing: \
-		src/prompt: \
 		src/utils \
 
 
 # Compiler and Flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I include -g3
+CFLAGS =  -Wall -Wextra -Werror -I include -g3
 LDFLAGS = -L lib/libft -lft -lreadline
 
 OBJ_DIR = obj
@@ -80,9 +97,8 @@ norma:
 	@clear
 	@norminette $(INC_PATH) $(SRC_PATH) | grep Error || true
 
-leak:
+valg:
 	valgrind -q --leak-check=full --show-leak-kinds=all --trace-children=yes \
-	--suppressions=./tests/readline.supp --track-fds=yes --track-origins=yes \
 	./minishell
 
 .PHONY: all clean fclean re libft

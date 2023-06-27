@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_utils.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilhfer <guilhfer@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 12:06:28 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/05/28 12:58:41 by guilhfer         ###   ########.fr       */
+/*   Created: 2023/06/25 05:46:09 by lucperei          #+#    #+#             */
+/*   Updated: 2023/06/25 19:39:47 by guilhfer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/libft.h"
 
-void	clean_lex(t_list *lex)
+char	*ft_strstr(const char *stack, const char *c)
 {
-	t_list	*temp;
+	size_t	len;
 
-	if (!lex)
-		return ;
-	while (!lex)
+	len = ft_strlen(c);
+	if (!(*c))
+		return ((char *)stack);
+	while (*stack)
 	{
-		temp = lex;
-		lex = lex->next;
-		free(temp);
+		if (ft_strncmp(stack, c, len) != 0)
+			stack++;
+		else
+			return ((char *)stack);
 	}
-}
-
-void	reset_ok(t_data *data)
-{
-	data->child = 1;
+	return (NULL);
 }
