@@ -43,23 +43,15 @@ int get_name_size(char *str)
 
 int fd_is_append(int append, char *filename)
 {
-    int fd;
-
+	int fd;
+	
     if (append == 0)
-    {
         fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-        return (fd);
-    }
     else if (append == 1)
-    {
         fd = open(filename, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-        return (fd);
-    }
     else
-    {
         fd = open(filename, O_RDONLY);
-        return (fd);
-    }
+    return (fd);
 }
 
 void msg_error(void)
