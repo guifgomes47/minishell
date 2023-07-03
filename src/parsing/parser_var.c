@@ -53,56 +53,56 @@ static char *duplicate_value(char *str)
     return (value);
 }
 
-static char *get_value(char *name, t_data *data)
+static char *get_value(char *name, char **envp)
 {
-    char **env;
-    int i;
-    int j;
-    int c;
-
-    i = 0;
-    env = data->envp;
-    while (env[i])
-    {
-        j = 0;
-        c = 0;
-        while (env[i][j] && env[i][j] != '=' && env[i][j] == name[c])
-        {
-            c++;
-            j++;
-        }
-        if (env[i][j] == '=' && !name[c])
-            return (duplicate_value(&env[i][j + 1]));
-        i++;
-    }
-    return (NULL);
+	char **env;
+	int i;
+	int j;
+	int c;
+	
+	i = 0;
+	env = envp;
+	while (env[i])
+	{
+		j = 0;
+		c = 0;
+		while (env[i][j] && env[i][j] != '=' && env[i][j] == name[c])
+		{
+			c++;
+			j++;
+		}
+		if (env[i][j] == '=' && !name[c])
+			return (duplicate_value(&envp[i][j + 1]));
+		i++;
+	}
+	return (NULL);
 }
 
-void parser_var(char **input_addr, int *index, t_data *data, t_shell *shell)
+void parser_var(char **input_addr, int *index, t_data *data)
 {
     int len;
-    char *tmp;
     char *value;
     char *name;
     char *input;
 
-    len = get_len(&(input_addr[0][*index + 1]));
-    name = ft_substr(*input_addr, *index + 1, len);
-    if (len == 1 && input_addr[0][*index + 1] == '?')
-        value = ft_itoa(shell->status);
+    len = ft_strlen(*input_addr + *index + 1);
+    name = malloc((len + 1) * sizeof(char));
+	ft_strncpy(name, *input_addr + *index + 1, len);
+	name[len] = '\0';
+    if (len == 1 && (*input_addr)[*index + 1] == '?')
+		value = ft_strdup("0");
     else if (len)
-        value = get_value(name, data);
+        value = get_value(name, data->envp);
     else
         value = ft_strdup("$");
     free(name);
-    input = ft_substr(*input_addr, 0, *index);
-    tmp = ft_strjoin(input, value);
-    free(input);
-    input = ft_strjoin(tmp, &(input_addr[0][*index + 1 + len]));
-    len = ft_strlen(value);
-    free(tmp);
-    free(value);
+    input = malloc((ft_strlen(*input_addr) + ft_strlen(value)) * sizeof(char));
+	ft_strncpy(input, *input_addr, *index);
+	input[*index] = '\0';
+	ft_strcat(input, value);
+	ft_strcat(input, *input_addr + *index + 1 + len);
     free(*input_addr);
     *input_addr = input;
-    *index += len - 1;
+    *index += ft_strlen(value) - 1;
+    free(value);
 }
