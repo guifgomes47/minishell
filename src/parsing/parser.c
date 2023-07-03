@@ -98,5 +98,5 @@ int init_parser(char *input, t_data *data, t_shell *shell)
         free(clean_input);
         return (0);
     }
-    return (parser_input(clean_input, data, 0, shell));
+	return (parser_input(clean_input, data, 0));
 }
