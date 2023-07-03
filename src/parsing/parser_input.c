@@ -47,9 +47,7 @@ static int parse_semicolon(char *input, int index, t_data *data)
 }
 
 int verify_caracter(char **input, int *index, t_data *data)
-{
-    t_shell shell;
-
+{	
     if ((*input)[*index] == '\'')
     {
         (*index)++;
@@ -67,12 +65,12 @@ int verify_caracter(char **input, int *index, t_data *data)
         return (1);
     }
     else if ((*input)[*index] == '$')
-        parser_var(input, index, data, &shell);
+        parser_var(input, index, data);
     (*index)++;
     return (0);
 }
 
-int parser_input(char *input, t_data *data, int piped, t_shell *shell)
+int parser_input(char *input, t_data *data, int piped)
 {
     int index;
     int count;
@@ -89,7 +87,7 @@ int parser_input(char *input, t_data *data, int piped, t_shell *shell)
                 while (input[index] == '\\' && ++index)
                     count++;
                 if (input[index] == '$' && !(count % 2))
-                    parser_var(&input, &index, data, shell);
+                    parser_var(&input, &index, data);
                 if (count && !(count % 2))
                     index--;
                 index++;
