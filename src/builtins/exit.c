@@ -16,7 +16,7 @@ void exit_pipe(t_data *data)
 {
     t_shell shell;
 
-    free_input(data->envp);
+    // free_input(data->envp);
     if (shell.input)
         free(shell.input);
     free(data->dir);
@@ -28,7 +28,8 @@ void error_message(char *str, int status)
     t_shell shell;
 
     shell.status = status;
-    ft_putstr_fd(str, 2);
+    // ft_putstr_fd(str, 2);
+    perror(str);
 }
 
 int is_number(char *str)
