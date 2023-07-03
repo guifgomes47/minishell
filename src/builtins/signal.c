@@ -12,27 +12,19 @@
 
 #include "../include/minishell.h"
 
-void handle_signal(int signal)
+void handle_signal(int sig)
 {
-    t_shell shell;
-
-    if (signal == SIGINT)
-    {
-        shell.status = 130;
-        if (shell.input)
-            ft_putstr_fd("\nminishell>", 2);
-        if (shell.input)
-            free(shell.input);
-        shell.input = ft_strdup("\0");
+    if (sig == SIGINT)
+	{
+        printf("\n");
+        rl_on_new_line();
+        rl_replace_line("", 0);
+        rl_redisplay();
     }
-    else if (signal == SIGQUIT)
-        write(2, "\b\b \b\b", 6);
 }
 
 void init_signal(void)
 {
-    if (signal(SIGINT, handle_signal) == SIG_ERR)
-        exit(EXIT_FAILURE);
-    else if (signal(SIGQUIT, handle_signal) == SIG_ERR)
-        exit(EXIT_FAILURE);
+	signal(SIGINT, handle_signal);
+    signal(SIGQUIT, SIG_IGN);
 }
