@@ -55,7 +55,6 @@ int process_input(char *input, t_data *data, int piped)
     command = split_input(input);
     free(input);
     action_for_input(command, data);
-    free_input(command);
     dup2(fds[0], 1);
     dup2(fds[1], 1);
     close_fd(data);
