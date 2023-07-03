@@ -29,8 +29,11 @@ void free_input(char **input)
     int index;
 
     index = 0;
-    while (input[index])
-        free(input[index++]);
+    while (input[index] != NULL)
+    {
+        free(input[index]);
+        index++;
+    }
     free(input);
 }
 
