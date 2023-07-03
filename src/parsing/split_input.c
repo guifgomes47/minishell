@@ -114,19 +114,28 @@ char **split_input(char *str)
 {
     char **input;
     int index;
+	int size;
     int len;
+	int i;
 
-    len = substrings_account(str);
-    input = malloc((len + 1) * sizeof(char *));
+	i = 0;
+    len = 0;
+    size = ft_strlen(str);
+    while (i < size)
+    {
+        if (str[i] == ' ')
+            len++;
+		i++;
+    }
+    input = malloc((len + 2) * sizeof(char *));
     if (!input)
         exit(EXIT_FAILURE);
     index = 0;
-    while (index < len)
+    char *ptr = ft_strtok(str, " ");
+    while (ptr != NULL)
     {
-        input[index++] = split_str(str);
-        if (index > 0 && !input[index - 1])
-            return (NULL);
-        str = next_input(str);
+        input[index++] = split_str(ptr);
+        ptr = ft_strtok(NULL, " ");
     }
     input[index] = NULL;
     return (input);
