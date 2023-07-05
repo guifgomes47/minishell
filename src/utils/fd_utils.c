@@ -6,12 +6,14 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 18:13:13 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/24 18:13:13 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/05 03:18:53 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+// Responsavel por fechar os descritores de arquivo (file descriptors) 
+// para liberar os recursos de entrada e saída utilizados pelo programa.
 void close_fd(t_data *data)
 {
     if (data->fd_input != 0)
