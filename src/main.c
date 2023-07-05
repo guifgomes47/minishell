@@ -6,17 +6,17 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 01:23:59 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/06/25 07:38:10 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/04 23:54:22 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
 	t_data data;
 	t_shell shell;
+	// int fd;
 	char *line;
 
 	(void)argc;
@@ -24,11 +24,14 @@ int	main(int argc, char **argv, char **envp)
 	init_data(&data, &shell, envp);
 	if (!data.envp)
 		exit(EXIT_FAILURE);
-	shell.input = NULL;
 	while (1)
 	{
 		shell.quit = 0;
+		// free(shell.input);
 		init_signal();
+		// ft_putstr_fd("minishell>", 2);
+		// fd = open(shell.input, O_RDONLY);
+		// line = get_next_line(0);
 		line = readline("minishell> ");
 		if (line == NULL)
 		{
@@ -37,8 +40,11 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (ft_strlen(line) > 0)
 			add_history(line);
-		init_parser(line, &data, &shell);
-		free(line);
+		if (!line)
+			free_memory(&data, shell.input);
+		else
+			init_parser(line, &data, &shell);
+		// free(line);
 	}
 	rl_clear_history();
 	return (0);
