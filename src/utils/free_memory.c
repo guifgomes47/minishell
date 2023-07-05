@@ -6,11 +6,13 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 23:49:44 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/25 03:48:16 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/05 03:07:08 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+// Função para diferentes tipos de liberação de memoria
 
 void free_env(char **envp)
 {
@@ -24,12 +26,15 @@ void free_env(char **envp)
     free(envp);
 }
 
+// Libera memoria da entrada de dados (comandos)
 void free_input(char **input)
 {
     int index;
 
     index = 0;
-    while (input[index] != NULL)
+    // while (input[index])
+    //     free(input[index++]);
+	while (input[index] != NULL)
     {
         free(input[index]);
         index++;
