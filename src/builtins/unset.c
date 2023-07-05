@@ -6,12 +6,13 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 14:58:44 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/25 05:11:30 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/05 05:12:03 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+// Recebe, armazena as variáveis de ambiente  apos remoção e retorna 
 char **unset_env(char **env, int index)
 {
     int x;
@@ -38,6 +39,7 @@ char **unset_env(char **env, int index)
     return (aux);
 }
 
+// Verifica e remove variáveis de ambiente, caso contrario retorna erro
 void ft_unset(char **input, t_data *data)
 {
     int index;
