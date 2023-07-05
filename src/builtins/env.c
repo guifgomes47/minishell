@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 03:58:50 by guilhfer          #+#    #+#             */
-/*   Updated: 2023/06/25 05:52:41 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:16:01 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@
 // 	return (NULL);
 // }
 
+// Esta função vai percorre o array env e imprime na saída padrão (stdout) todas as strings 
+// que contêm o caractere "=". Essas strings normalmente representam as 
+// variáveis de ambiente no formato "nome=valor".
 void ft_env(char **env)
 {
 	int x;
@@ -101,10 +104,10 @@ void ft_env(char **env)
 }
 
 // Essa função fara uma copia do array env, alocando, interando e colocando nulo no final.
-char **copy_env(char **envp)
+char	**copy_env(char **envp)
 {
-	int index;
-	char **env_dt;
+	int		index;
+	char	**env_dt;
 
 	index = 0;
 	env_dt = malloc(sizeof(char *) * env_len(envp));
