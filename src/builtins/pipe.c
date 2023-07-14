@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 02:49:23 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 19:14:08 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/12 21:48:39 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,40 @@ int handle_pipe(char *a, char *b, t_data *data)
     pid_t pid;
     int fds[2];
 
-// Cria um pipe usando a função pipe(), armazenando os descritores de arquivo nos elementos do array fds.
-    if (pipe(fds) < 0)
+// Cria um pipe usando a função pipe(), para conectar os processos, armazenando os descritores de arquivo nos elementos do array fds.
+	// if (pipe(fds) < 0)
+    if (pipe(fds) < 0 || pipe(fds) == -1)
+	{
+		perror("Fork error");
         exit(EXIT_FAILURE);
+	}
 	// Cria um novo processo filho
     pid = fork();
 	// Verifica se e o processo pai ou filho (0)
-    if (pid == 0)
+	if	(pid == -1)
+	{
+		perror("Fork");
+		exit(EXIT_FAILURE);
+	}
+    else if (pid == 0)
     {
         free(b);
-        dup2(fds[1], 1);
+		dup2(fds[1], 1);
+        // dup2(fds[0], STDIN_FILENO);
         close(fds[0]);
         close(fds[1]);
         process_input(a, data, 1);
     }
-	
     else if (pid < 0)
         exit(EXIT_FAILURE);
     else // se for o processo pai
     {
+		// dup2(fds[1], STDOUT_FILENO);
+		// close(fds[0]);
         // free(a);
         a = NULL;
         handle_parent_process(a, data, pid, fds);
     }
-	return (0);
-    // return (1);
+	// return (0);
+    return (1);
 }
