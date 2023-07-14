@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 02:11:16 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 04:33:27 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/07 01:50:04 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // substituindo as aspas simples (') pelo caractere de aspas duplas ("), ou vice-versa. Basicamente, ela escapa o caractere.
 void escape_char(char **dst, char **src)
 {
-    char ctr;
+    char ctr; //quote
 
     (*src)++;
     if (**src == '\'')
@@ -26,6 +26,14 @@ void escape_char(char **dst, char **src)
     *((*dst)++) = ctr;
     *((*dst)++) = *((*src)++);
     *((*dst)++) = ctr;
+}
+
+// Esta função verificar se o caractere atual (na posição index) 
+// em uma string é uma barra invertida e, se for, avançar para o próximo caractere
+void should_escape(int *index, char *str)
+{
+	if (str[(*index)] == '\\')
+		(*index)++;
 }
 
 // A função copia os caracteres do ponteiro src para o ponteiro dst, até encontrar o caractere 
