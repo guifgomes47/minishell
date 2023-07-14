@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 15:39:15 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 20:08:50 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/07 02:44:07 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int execute(char **input, t_data *data)
         stat(path[index], &statbuf);
 		// percorre cada caminho possível e tenta executar o comando
         if ((statbuf.st_mode & S_IXUSR) &&
-            (execve(path[index], input, data->envp) != -1))
+        (execve(path[index], input, data->envp) != -1))
             return (0);
         index++;
     }
@@ -62,7 +62,7 @@ int exec_and_verify(char **input, t_data *data)
 //     index = search_index("PATH=", data);
 //     stat(input[0], &statbuf);
 //     if (ft_strchr(input[0], '/') && (statbuf.st_mode & S_IXUSR) &&
-//         (execve(input[0], &input[0], data->envp) != -1))
+//     (execve(input[0], &input[0], data->envp) != -1))
 //         return (0);
 //     else if (index >= 0)
 //     {
@@ -83,7 +83,7 @@ void ft_exec(char **input, t_data *data)
     status = 0;
 	// Verifica se o comando evalido
     if (!verify_exec(input, data))
-        return (error_message("\t\tError: Unknown command\n", 127));
+        return (error_message("Error: Unknown command\n", 127));
     pid = fork();
 	// Se for o processo filho
     if (pid == 0)
