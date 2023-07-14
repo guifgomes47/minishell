@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 00:38:29 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 04:17:40 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/14 18:49:07 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char *input_clear(char *str)
         return (0);
 	// Caso contrário, aloca espaço suficiente
     clean_input = (char *)malloc((len + 1) * sizeof(char));
+	// verifica se não e nula
     if (!clean_input)
         exit(EXIT_FAILURE);
 	// chama a função copy_input para copiar a entrada de dados limpa para a nova string. 
