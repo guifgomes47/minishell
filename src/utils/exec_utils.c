@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 15:45:38 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 02:36:51 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:19:29 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ char **get_path(int aux, t_data *data, char *input)
     char **paths;
     char *str;
     char *temp;
-	
-	paths = NULL;
-    str = NULL;
-    temp = NULL;
-	if (aux >= 0)
-	{
+	// Apos comentar consegui ter acesso ao env
+	// paths = NULL;
+    // str = NULL;
+    // temp = NULL;
+	// if (aux >= 0)
+	// {
 		index = 0;
 		// Extrai variável de ambiente relacionada ao caminho do diretório
 		str = ft_strdup(&data->envp[aux][5]);
@@ -43,7 +43,7 @@ char **get_path(int aux, t_data *data, char *input)
 			free(temp);
 			index++;
 		}
-	}
+	// }
     return (paths);
 }
 // {
@@ -116,12 +116,9 @@ int verify_exec(char **input, t_data *data)
 	// Abaixo verifica se o elemento input[0] é um arquivo executavel
     stat(input[0], &statbuf); 
     if (ft_strchr(input[0], '/') && (statbuf.st_mode & S_IXUSR) &&
-        !(statbuf.st_mode & __S_IFDIR))
-		//Se for executavel retorna 1
-        ret = 1; 
+    !(statbuf.st_mode & __S_IFDIR))
+        ret = 1; //Se for executavel retorna 1
     else
-	// Caso contrario chama a função abaixo para verificar se o comando pode ser 
-	// executado usando os caminhos de diretório relevantes. 
-        ret = verify_exec_path(input, data);
+        ret = verify_exec_path(input, data);// Caso contrario chama a função abaixo para verificar se o comando pode ser executado usando os caminhos de diretório relevantes.
     return (ret);
 }
