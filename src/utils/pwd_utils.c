@@ -91,3 +91,4 @@ int handle_pwd(t_data *data, char *input)
     free(aux);
     return (1);
 }
+
