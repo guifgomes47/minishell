@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 22:29:31 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 19:36:24 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/07 03:22:44 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int search_index(char *search, t_data *data)
     while (data->envp[x])
     {
         y = 0;
-        while (data->envp[x][y] && data->envp[x][y] == search[y] &&
-               search[y] != '\0' && search[y] != '=' &&
-               data->envp[x][y] != '\0' && data->envp[x][y] != '=')
+        while (data->envp[x][y] && data->envp[x][y] == search[y] 
+		&& search[y] != '\0' && search[y] != '=' &&
+        data->envp[x][y] != '\0' && data->envp[x][y] != '=')
             y++;
         if ((data->envp[x][y] == '\0' || data->envp[x][y] == '=') &&
-            (search[y] == '\0' || search[y] == '='))
+        (search[y] == '\0' || search[y] == '='))
             return (x);
         x++;
     }
