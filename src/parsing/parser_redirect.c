@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:57:58 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 04:42:16 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:47:45 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 // Esta função é responsável por extrair o nome de um arquivo a partir de uma 
 // string de origem (src) e armazená-lo em uma string de destino (dest). 
+
+// make_filename -> parser_redir.c
 void filename_init(char *src, char *dest, int index, int len)
 {
     while (src[index] != ' ' && src[index] != '|' && src[index] != ';' &&
