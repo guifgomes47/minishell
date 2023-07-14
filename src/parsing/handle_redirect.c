@@ -6,12 +6,16 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:38:33 by lucperei          #+#    #+#             */
-/*   Updated: 2023/06/25 05:09:23 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/14 21:46:39 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+// Usada para determinar o tamanho de uma sequência de caracteres até encontrar um caractere 
+// de espaço (' '), barra vertical ('|'), ponto e vírgula (';'), maior ('>') ou menor ('<'). 
+// Ele percorre a str caracter por caracter, ignorando caracteres entre aspas simples ('') 
+// ou aspas duplas (""). 
 int get_name_size(char *str)
 {
     int index;
@@ -41,35 +45,59 @@ int get_name_size(char *str)
     return (index);
 }
 
+// É usada para abrir um arquivo com base no valor do parâmetro append. 
+// O descritor de arquivo resultante é retornado.
 int fd_is_append(int append, char *filename)
 {
 	int fd;
 	
     if (append == 0)
-        fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+        fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR, 777);
     else if (append == 1)
-        fd = open(filename, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+        fd = open(filename, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR, 777);
     else
-        fd = open(filename, O_RDONLY);
+        fd = open(filename, O_RDONLY, 777);
     return (fd);
 }
+// {
+// 	int fd;
+	
+//     if (append == 0)
+//     {
+//         fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+//         return (fd);
+//     }
+//     else if (append == 1)
+//     {
+//         fd = open(filename, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+//         return (fd);
+//     }
+//     else
+//     {
+//         fd = open(filename, O_RDONLY);
+//         return (fd);
+//     }
+// }
 
+// É usada para exibir uma mensagem de erro indicando que as permissões estão incorretas.
 void msg_error(void)
 {
     t_shell shell;
     t_data data;
-
+	
     printf("Error: wrong permissions\n");
     shell.status = 1;
     data.redirection = 0;
 }
 
+// Usada para redirecionar a entrada/saída de um programa com base em um caractere especial
+//  encontrado na string str no índice index. 
 void redirect(char *str, int index, char **input, int is_append, int op)
 {
     int fd;
     int i;
     char *filename;
-    t_data data;
+	t_data data;
 
     i = index;
     if (str[i + 1] == ' ')
@@ -90,6 +118,8 @@ void redirect(char *str, int index, char **input, int is_append, int op)
     parser_redirect(input);
 }
 
+// Usada para lidar com o redirecionamento de entrada/saída. 
+// Com base no caractere especial encontrado na string
 void handle_redirect(char **input, int index)
 {
     char *str;
