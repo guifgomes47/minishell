@@ -23,12 +23,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <fcntl.h>
+#include <fcntl.h> 
 #include <sys/stat.h>
 #include <errno.h>
 #include <signal.h>
 #include <dirent.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 
 typedef struct s_data
 {
@@ -111,12 +112,12 @@ void ft_exec(char **input, t_data *data);
 int exec_and_verify(char **input, t_data *data);
 int execute(char **input, t_data *data);
 void ft_env(char **env);
-char **copy_env(char **envp);
+char	**copy_env(char **envp);
 int env_len(char **env);
 void ft_echo(char **inputs);
 void ft_cd(char **command, t_data *data);
 int cd_sub(t_data *data);
 int cd_dir(t_data *data);
-int cd_path(char **arg, t_data *data);
+int	cd_path(char **arg, t_data *data);
 
 #endif
