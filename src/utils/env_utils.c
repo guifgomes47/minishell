@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 03:47:57 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 03:37:28 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:30:02 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ int env_len(char **env)
 	
 	index = 0;
 	while (env[index])
-		index ++;
+		index++;
 	return (++index);
 }
