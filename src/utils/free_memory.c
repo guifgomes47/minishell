@@ -6,14 +6,13 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 23:49:44 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 03:07:08 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/11 04:10:05 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 // Função para diferentes tipos de liberação de memoria
-
 void free_env(char **envp)
 {
     int index;
@@ -50,3 +49,4 @@ void free_memory(t_data *data, char *input)
     ft_putstr_fd("exit\n", 2);
     exit(EXIT_SUCCESS);
 }
+
