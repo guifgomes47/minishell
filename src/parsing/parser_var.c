@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:25:34 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 04:27:31 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/06 16:46:28 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static void add_escaped(char *src, char *dst, int *i, int *j)
 // Cria uma cópia de str
 static char *duplicate_value(char *str)
 {
-    char *value;
-    int len;
-    int i;
-    int j;
+    char	*value;
+    int		len;
+    int		i;
+    int		j;
 
     i = 0;
     j = 0;
