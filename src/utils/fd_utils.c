@@ -27,3 +27,4 @@ void close_fd(t_data *data)
         data->fd_output = 1;
     }
 }
+
