@@ -30,3 +30,4 @@ void init_data(t_data *data, t_shell *shell, char **envp)
 	// Armazena comandos de entrada
     shell->input = NULL;
 }
+
