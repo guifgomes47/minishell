@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 22:07:37 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 19:51:04 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/07 03:19:35 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void ft_exit(char **command, t_data *data)
                 shell.status = 255;
         }
         else
-            error_message("\t\tError exit: numeric argument required\n", 2);
+            error_message("Error exit: numeric argument required\n", 2);
     }
     free_env(command);
     free(data->dir);
