@@ -6,7 +6,7 @@
 /*   By: lucperei <lucperei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 21:49:53 by lucperei          #+#    #+#             */
-/*   Updated: 2023/07/05 21:02:23 by lucperei         ###   ########.fr       */
+/*   Updated: 2023/07/07 02:11:01 by lucperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	cd_dir(t_data *data)
 {
 	if (search_index("HOME=", data) < 0 ||
-		chdir((ft_strchr(data->envp[search_index("HOME=", data)], '=') + 1)) == -1)
+	chdir((ft_strchr(data->envp[search_index("HOME=", data)], '=') + 1)) == -1)
         return (0);
     handle_pwd(data, NULL);
     return (1);
@@ -32,7 +32,7 @@ int	cd_dir(t_data *data)
 int cd_sub(t_data *data)
 {
     if (search_index("OLDPWD=", data) < 0 ||
-        chdir((ft_strchr(data->envp[search_index("OLDPWD=", data)], '=') + 1)) == -1)
+    chdir((ft_strchr(data->envp[search_index("OLDPWD=", data)], '=') + 1)) == -1)
         return (0);
     handle_pwd(data, NULL);
     return (1);
